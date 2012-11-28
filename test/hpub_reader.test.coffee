@@ -4,19 +4,6 @@ hpub = require('../index.js')
 
 describe 'hpub', ->
   describe 'reader', ->
-    # it 'should throw an Error when file is missing', ->
-    #     fun = ->
-    #         new hpub.Reader "./test/unknownbook.hpub"
-
-    #     assert.throws (-> 
-    #         fun()
-    #     )
-
-    # it 'should throw Error when file is corrupted', ->
-    #     reader = new hpub.Reader "./test/corruptedbook.hpub"
-    #     assert.throws (-> 
-    #         throw new Error("Invalid or unsupported hpub format.")
-    #     ), Error
 
     it 'should read file', ->
         new hpub.Reader "./test/hpub_samples/book1.hpub", (err, reader) ->
