@@ -1,6 +1,6 @@
 {
-  "name": "hpub",
-  "version": "0.0.1",
+  "name": "hpubjs",
+  "version": "0.0.2",
   "description": "An hpub reader and writer",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "dependencies": {
       "mocha": "*"
-    , "adm-zip": "*"
+    , "zipfile": "*"
     , "archiver": "*" 
     , "async": "*"
     , "underscore": "*"
@@ -16,7 +16,8 @@
   },
   "repository": "",
   "keywords": [
-    "hpub"
+    "hpub",
+    "hpubjs"
   ],
   "author": "Michal Ostrowski",
   "license": "BSD"
