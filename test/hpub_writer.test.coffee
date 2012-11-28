@@ -4,7 +4,6 @@ fs = require 'fs-extra'
 
 describe 'hpub', ->
   describe 'writer', ->
-
     it 'should be able to add meta', ->
         writer = new hpub.Writer "./test/hpub_samples/book_to_be"
         meta =
