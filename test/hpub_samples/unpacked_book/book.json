@@ -1,0 +1,20 @@
+{
+    "hpub": 1,
+    "title": "Title of the book",
+    "author": [
+        "First Author",
+        "Other Author"
+    ],
+    "url": "http://example.com/book/thisbook",
+    "contents": [
+        "page-000.html"
+    ],
+    "creator": [
+        "fagbokforlaget"
+    ],
+    "date": 1354029609149,
+    "cover": "book.png",
+    "publisher": "Fagbokforlaget",
+    "orientation": "both",
+    "zoomable": true
+}
