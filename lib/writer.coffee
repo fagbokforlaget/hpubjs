@@ -74,7 +74,7 @@ class Writer
 
         series = @meta.contents
         series.push "book.json"
-        series.push @meta.cover
+        series.push @meta.cover if @meta.cover
 
         @_prepareAssets (err, result) =>
             unless err
