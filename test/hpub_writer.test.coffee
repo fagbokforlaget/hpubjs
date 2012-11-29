@@ -122,5 +122,3 @@ describe 'hpub', ->
                 assert.equal res, true
                 fs.removeSync file
                 fs.removeSync "tmp/book.hpub"
-
-

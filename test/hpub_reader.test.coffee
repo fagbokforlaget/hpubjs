@@ -34,16 +34,3 @@ describe 'hpub', ->
             meta = reader.meta()
             assert.notEqual(meta, undefined)
             assert.equal(typeof meta.author, 'object')
-
-    
-
-
-
-
-
-            
-            
-
-
-        
-
