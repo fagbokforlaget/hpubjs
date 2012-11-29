@@ -79,7 +79,6 @@ class Writer
         @_prepareAssets (err, result) =>
             unless err
                 series = _.union series, result
-
                 async.forEachSeries series, (file, next) =>
                     archive.addFile fs.createReadStream("#{@folder}/#{file}"), {name: "#{file}"}, -> 
                         next()

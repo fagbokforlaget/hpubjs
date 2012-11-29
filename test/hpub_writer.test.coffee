@@ -30,7 +30,7 @@ describe 'hpub', ->
 
         assert.equal writer.meta.contents[0], page
 
-    it 'should add book.json file', ->
+    it 'should add book.json file', (done) ->
         writer = new hpub.Writer "./test/hpub_samples/book_to_be"
         meta =
             hpub: 1
@@ -55,6 +55,7 @@ describe 'hpub', ->
             file = "./test/hpub_samples/book_to_be/book.json"
             assert.equal fs.existsSync(file), true
             fs.removeSync file
+            done()
 
     it 'should be able to add assets folders', ->
         writer = new hpub.Writer "./test/hpub_samples/book_to_be"
@@ -64,7 +65,7 @@ describe 'hpub', ->
         assert.equal writer.assetsFolders[0], 'css'
         assert.equal writer.assetsFolders[1], 'js'
 
-    it 'should create a simple hpub book', ->
+    it 'should create a simple hpub book', (done) ->
         writer = new hpub.Writer "./test/hpub_samples/book_to_be"
         meta =
             hpub: 1
@@ -85,15 +86,16 @@ describe 'hpub', ->
         writer.addPage page
 
         writer.build (err) ->
-            writer.pack "tmp/book", (size) ->
+            writer.pack "./test/book", (size) ->
                 if size > 0 then res = true else res = false
                 assert.equal res, true
                 file = "./test/hpub_samples/book_to_be/book.json"
                 fs.removeSync file
-                fs.removeSync "tmp/book.hpub"
+                fs.removeSync "test/book.hpub"
+                done()
                 
 
-    it 'should create an hpub book with assets', ->
+    it 'should create an hpub book with assets', (done) ->
         writer = new hpub.Writer "./test/hpub_samples/book_to_be"
         meta =
             hpub: 1
@@ -116,9 +118,10 @@ describe 'hpub', ->
         writer.addAssetsFolders 'css', 'js'
 
         writer.build (err) ->
-            writer.pack "tmp/book", (size) ->
+            writer.pack "test/book", (size) ->
                 file = "./test/hpub_samples/book_to_be/book.json"
                 if size > 0 then res = true else res = false
                 assert.equal res, true
                 fs.removeSync file
-                fs.removeSync "tmp/book.hpub"
+                fs.removeSync "test/book.hpub"
+                done()
