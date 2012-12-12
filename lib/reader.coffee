@@ -9,9 +9,11 @@ class Reader
                     @unpacked = true
                     @hpubFile = undefined
                     @hpubDir = file
+                    @filelist = []
                 else if stat.isFile()
                     @unpacked = false
                     @hpubFile = undefined
+                    @filelist = []
                     @_initHpubFile(file)
                     
                 callback(null, @)
@@ -39,13 +41,17 @@ class Reader
                 fs.mkdirsSync @hpubDir
 
             for file in @hpubFile.names
+                @filelist.push file
                 @extractToFile(file)
 
             @unpacked = true
         callback(@hpubDir)
 
     extractToBuffer: (name) ->
-        @hpubFile.readFileSync name if @hpubFile
+        try
+            @hpubFile.readFileSync name if @hpubFile
+        catch e
+            throw new Error "File #{name} is missing. {e}"
 
     extractToFile: (name) ->
         if @hpubFile
