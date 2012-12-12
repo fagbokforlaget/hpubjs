@@ -7,18 +7,24 @@
     "test": "make test"
   },
   "dependencies": {
-      "mocha": "*"
+      "coffee-script": "*"
     , "zipfile": "*"
     , "archiver": "*" 
     , "async": "*"
     , "underscore": "*"
     , "fs-extra": "*"
   },
-  "repository": "",
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fagbokforlaget/hpubjs.git"
+  },
   "keywords": [
     "hpub",
-    "hpubjs"
+    "js"
   ],
   "author": "Michal Ostrowski",
-  "license": "BSD"
+  "license": "MIT"
 }
