@@ -12,7 +12,10 @@ class Writer
       url: ''
       contents: []
 
+    @filelist = []
+
     @assetsFolders = []
+    @assetFiles = []
 
   build: (callback) ->
     fs.writeJSONFile "#{@folder}/book.json", @meta, (err) ->
@@ -29,6 +32,9 @@ class Writer
   addAssetsFolders: (folders...) ->
     for folder in folders
       @assetsFolders.push folder
+
+  addAssetFile: (file) ->
+    @assetFiles.push file
 
   _walk: (dir, removeString, done) ->
     # recursive search in directory
@@ -78,6 +84,7 @@ class Writer
     @_prepareAssets (err, result) =>
       unless err
         series = _.union series, result
+        series = _.union series, @assetFiles
         async.forEachSeries series, (file, next) =>
             archive.addFile fs.createReadStream("#{@folder}/#{file}"), {name: "#{file}"}, -> 
                 next()

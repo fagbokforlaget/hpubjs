@@ -39,9 +39,11 @@ class Reader
         ts = Math.round((new Date()).getTime())
         @hpubDir = "/tmp/hpub_#{ts}"
         fs.mkdirsSync @hpubDir
-        for file in @hpubFile.names
-          @filelist.push file
-          @extractToFile(file)
+      
+      for file in @hpubFile.names
+        @filelist.push file
+        @extractToFile(file)
+
       @unpacked = true
     callback(@hpubDir)
 
