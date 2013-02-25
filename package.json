@@ -1,18 +1,19 @@
 {
   "name": "hpubjs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An hpub reader and writer",
   "main": "index.js",
   "scripts": {
     "test": "make test"
   },
   "dependencies": {
-      "coffee-script": "*"
-    , "zipfile": "*"
-    , "archiver": "*" 
-    , "async": "*"
-    , "underscore": "*"
-    , "fs-extra": "*"
+    "coffee-script": "*",
+    "zipfile": "*",
+    "archiver": "*",
+    "async": "*",
+    "underscore": "*",
+    "fs-extra": "*",
+    "mime-magic": "*"
   },
   "devDependencies": {
     "mocha": "*"
@@ -26,5 +27,6 @@
     "hpubjs"
   ],
   "author": "Michal Ostrowski",
-  "license": "MIT"
+  "license": "MIT",
+  "readmeFilename": "README.md"
 }

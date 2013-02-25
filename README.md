@@ -20,12 +20,10 @@ $ npm install hpubjs
 hpub = require("hpub");
 
 // un-packing book to a folder
-new hpub.Reader("path/to/book.hpub", function(err, reader) {
-  reader.unpack(function(folder){
-    //you have now book unpacked in 'folder'
-
-    // if it's temporary then it could be removed...
-    reader.clean();
+reader = new hpub.Reader("path/to/book.hpub");
+reader.read(function(err) {
+  reader.extract("test/folder", function(err){
+    // do whatever you want with extracted publication
   });
 });
 
@@ -36,14 +34,16 @@ You can read meta information or any other file without extracting the whole boo
 ```
 
 // reading meta information (from book.json) without un-packing the book
-new hpub.Reader("path/to/book.hpub", function(err, reader) {
+reader = new hpub.Reader("path/to/book.hpub")
+reader.read(function(err) {
   meta = reader.meta();
   // do something with meta information...
 });
 
 // you can extract any file inside book.hpub to buffer
-new hpub.Reader("path/to/book.hpub", function(err, reader) {
-  bufferedPage = reader.extractToBuffer('page-000.html');
+reader = new hpub.Reader("path/to/book.hpub")
+reader.read(function(err) {
+  bufferedPage = reader.getFile('page-000.html');
   // ... do something with it
 });
 
