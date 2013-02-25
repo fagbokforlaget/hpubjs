@@ -23,7 +23,7 @@ class Extractor
           @fileList = @zip.names
           callback null, @
         catch e
-          return callback(Error "This is not valid hpub file.", e)
+          callback(Error "This is not valid hpub file.", e)
 
   _mkdirDestFolder: (folder) ->
 
