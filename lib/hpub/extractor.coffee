@@ -55,12 +55,18 @@ class Extractor
   toFile: (file) ->
     if @zip
       _name = "#{@destFolder}/#{file}"
-      
       buffer = @toBuffer(file)
+      @_createFolders(_name)
       if file.charAt(file.length-1) is "/"
         fs.mkdirsSync _name unless fs.existsSync _name
       else
         fs.writeFileSync _name, buffer
+
+  _createFolders: (file) ->
+    parts = file.split('/')
+    parts.pop() unless parts[parts.length - 1] is "/"
+    dir = parts.join('/')
+    fs.mkdirsSync dir unless fs.existsSync dir
 
   getFile: (file) ->
     if @unpacked
