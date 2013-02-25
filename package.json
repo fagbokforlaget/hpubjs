@@ -1,6 +1,6 @@
 {
   "name": "hpubjs",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "An hpub reader and writer",
   "main": "index.js",
   "scripts": {
