@@ -1,14 +1,17 @@
 Extractor = require './hpub/extractor'
+Content = require './hpub/content'
 
 class Reader
   constructor: (@file) ->
     @zip = undefined
+    @files = undefined
 
   read: (callback) ->
     new Extractor @file, (err, zip) =>
       if err then return callback(err)
       @extracted = true
       @zip = zip
+      @files = @zip.fileList
 
       if @isValid()        
         callback null, @
@@ -41,5 +44,13 @@ class Reader
       fs.removeSync @hpubDir
     else
       throw new Error "You can't remove folder created outside this library."
+
+  content: ->
+    @_files ||= new Content @files if @files
+    @_files.content
+
+  assets: ->
+    @_files ||= new Content @files if @files
+    @_files.assets
 
 exports.Reader = Reader

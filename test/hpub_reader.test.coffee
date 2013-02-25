@@ -59,4 +59,11 @@ describe 'hpub', ->
             assert.equal meta.title, "Title of the book"
             assert.equal meta.contents[0], 'page-000.html'
             assert.equal meta.cover, 'book.png'
-            done()    
+            done()
+
+    it "should have filelist", (done) ->
+        hpub = new Hpub.Reader "./test/hpub_samples/book.hpub"
+        hpub.read (err) ->
+            assert.equal _.isArray(hpub.files), true
+            assert.equal hpub.files.length, 3
+            done()  
