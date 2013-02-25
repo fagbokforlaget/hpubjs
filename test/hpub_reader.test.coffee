@@ -67,3 +67,10 @@ describe 'hpub', ->
             assert.equal _.isArray(hpub.files), true
             assert.equal hpub.files.length, 3
             done()  
+
+    it "should file content", (done) ->
+        hpub = new Hpub.Reader "./test/hpub_samples/book.hpub"
+        hpub.read (err) ->
+            assert.equal _.isArray(hpub.content()), true
+            assert.equal hpub.content().length, 1
+            done()          

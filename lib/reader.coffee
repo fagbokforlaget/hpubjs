@@ -46,11 +46,11 @@ class Reader
       throw new Error "You can't remove folder created outside this library."
 
   content: ->
-    @_files ||= new Content @files if @files
+    @_files ||= new Content(@files).exec() if @files
     @_files.content
 
   assets: ->
-    @_files ||= new Content @files if @files
+    @_files ||= new Content(@files).exec() if @files
     @_files.assets
 
 exports.Reader = Reader

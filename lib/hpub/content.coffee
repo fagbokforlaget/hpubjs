@@ -4,9 +4,11 @@ class Content
     @assets = []
 
   exec: ->
-    for file in @list
-      parts = file.split('.')
+    for file of @list
+      parts = @list[file].split('.')
       ext = parts[parts.length - 1]
+      if ext is 'page' or ext is 'html' then @content.push @list[file]
+      else @assets.push @list[file]
+    @
 
-      if ext is 'page' or ext is 'html' then @content.push file
-      else @assets.push file
+module.exports = Content
