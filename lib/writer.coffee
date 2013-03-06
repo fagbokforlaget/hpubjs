@@ -119,6 +119,7 @@ class Writer
                 next()
           , (err) ->
             archive.finalize (written) ->
+                console.log "written", written, err
                 callback(written)
 
 
