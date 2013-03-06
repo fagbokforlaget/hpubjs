@@ -26,7 +26,6 @@ class Extractor
           callback(Error "This is not valid hpub file.", e)
 
   _mkdirDestFolder: (folder) ->
-
     fs.mkdirSync folder unless fs.existsSync folder
     return folder
 
