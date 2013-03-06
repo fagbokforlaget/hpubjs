@@ -86,8 +86,7 @@ describe 'hpub', ->
         writer.addPage page
 
         writer.build (err) ->
-            console.log "err1", err
-            writer.pack "./test/book", (size) ->
+            writer.pack "./test/book", (err, size) ->
                 if size > 0 then res = true else res = false
                 assert.equal res, true
                 file = "./test/hpub_samples/book_to_be/book.json"
@@ -119,7 +118,7 @@ describe 'hpub', ->
         writer.addAssetsFolders 'css', 'js'
 
         writer.build (err) ->
-            writer.pack "test/book", (size) ->
+            writer.pack "test/book", (err, size) ->
                 file = "./test/hpub_samples/book_to_be/book.json"
                 if size > 0 then res = true else res = false
                 assert.equal res, true
