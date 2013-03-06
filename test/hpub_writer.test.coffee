@@ -60,10 +60,10 @@ describe 'hpub', ->
     it 'should be able to add assets folders', ->
         writer = new hpub.Writer "./test/hpub_samples/book_to_be"
         
-        writer.addAssetsFolders('css', 'js')
+        writer.assets.addFolders('css', 'js')
 
-        assert.equal writer.assetsFolders[0], 'css'
-        assert.equal writer.assetsFolders[1], 'js'
+        assert.equal writer.assets.folders[0], 'css'
+        assert.equal writer.assets.folders[1], 'js'
 
     it 'should create a simple hpub book', (done) ->
         writer = new hpub.Writer "./test/hpub_samples/book_to_be"
@@ -115,7 +115,7 @@ describe 'hpub', ->
 
         writer.addPage page
 
-        writer.addAssetsFolders 'css', 'js'
+        writer.assets.addFolders 'css', 'js'
 
         writer.build (err) ->
             writer.pack "test/book", (err, size) ->

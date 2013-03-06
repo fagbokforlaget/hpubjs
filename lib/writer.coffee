@@ -2,6 +2,7 @@ archiver = require 'archiver'
 async = require 'async'
 _ = require "underscore"
 fs = require 'fs-extra'
+Assets = require './hpub/assets'
 
 class Writer
   constructor: (@folder) ->
@@ -14,8 +15,7 @@ class Writer
 
     @filelist = []
 
-    @assetsFolders = []
-    @assetFiles = []
+    @assets = new Assets @folder
 
   build: (callback) ->
     fs.writeJSONFile "#{@folder}/book.json", @meta, (err) ->
@@ -57,47 +57,6 @@ class Writer
     for property of @cleanedMeta meta
       @meta[property] = meta[property]
 
-  addAssetsFolders: (folders...) ->
-    for folder in folders
-      @assetsFolders.push folder
-
-  addAssetFile: (file) ->
-    @assetFiles.push file
-
-  _walk: (dir, removeString, done) ->
-    # recursive search in directory
-    # http://stackoverflow.com/a/5827895
-    self = @
-    results = []
-    fs.readdir dir, (err, list) ->
-      return done(err)  if err
-      pending = list.length
-      return done(null, results)  unless pending
-      list.forEach (file) ->
-        file = dir + "/" + file
-        fs.stat file, (err, stat) ->
-          if stat and stat.isDirectory()
-            self._walk file, removeString, (err, res) ->
-              results = results.concat(res)
-              done null, results  unless --pending
-          else
-            results.push file.replace(removeString, '')
-            done null, results  unless --pending
-
-  _prepareAssets: (callback) ->
-    assets = []
-    error = null
-
-    do_the_walk = (folder, next) =>
-      @_walk "#{@folder}/#{folder}", "#{@folder}/", (err, result) ->
-        error = err
-        assets = _.union assets, result
-        next()
-
-    async.forEachSeries @assetsFolders, do_the_walk, (err) ->
-      error = err if err
-      callback(error, assets)
-
   pack: (name, callback) ->
     out = fs.createWriteStream("#{name}.hpub")
     archive = archiver.createZip({level: 1})
@@ -110,10 +69,10 @@ class Writer
     series.push "book.json"
     series.push @meta.cover if @meta.cover
 
-    @_prepareAssets (err, result) =>
+    @assets.prepare (err, result) =>
       unless err
         series = _.union series, result
-        series = _.union series, @assetFiles
+        series = _.union series, @assets.files
         async.forEachSeries series, (file, next) =>
             archive.addFile fs.createReadStream("#{@folder}/#{file}"), {name: "#{file}"}, -> 
                 next()
