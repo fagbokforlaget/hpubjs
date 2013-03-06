@@ -86,6 +86,7 @@ describe 'hpub', ->
         writer.addPage page
 
         writer.build (err) ->
+            console.log "err1", err
             writer.pack "./test/book", (size) ->
                 if size > 0 then res = true else res = false
                 assert.equal res, true

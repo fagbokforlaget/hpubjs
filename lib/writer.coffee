@@ -94,7 +94,8 @@ class Writer
         assets = _.union assets, result
         next()
 
-    async.forEachSeries @assetsFolders, do_the_walk, ->
+    async.forEachSeries @assetsFolders, do_the_walk, (err) ->
+      error = err if err
       callback(error, assets)
 
   pack: (name, callback) ->
