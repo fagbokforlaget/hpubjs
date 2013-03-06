@@ -125,3 +125,24 @@ describe 'hpub', ->
                 fs.removeSync file
                 fs.removeSync "test/book.hpub"
                 done()
+
+    it 'should check cleanedMeta', (done) ->
+        writer = new hpub.Writer "./test/hpub_samples/book_to_be"
+        meta =
+            hpub: "1"
+            title: "Title of the book"
+            author: ['First Author', 'Other Author']
+            creator: 'fagbokforlaget'
+            date: Date.now()
+            url: 'http://example.com/book/thisbook'
+            cover: 'book.png'
+            publisher: 'Fagbokforlaget'
+            orientation: 'both'
+            zoomable: 'true'
+
+        writer.addMeta meta
+
+        assert.equal writer.meta["hpub"], 1
+        assert.equal writer.meta["creator"].length, 1
+        assert.equal writer.meta["zoomable"], true
+        done()

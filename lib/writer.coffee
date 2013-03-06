@@ -25,8 +25,36 @@ class Writer
     if fs.existsSync "#{@folder}/#{name}"
       @meta.contents.push name
 
+  # This method will cast all string objs to proper types
+  cleanedMeta: (meta) ->
+    i = 0
+    keys = Object.keys(meta)
+    # Do this sync.
+    while i < keys.length
+      key = keys[i]
+      if typeof meta[key] is "string"
+        # cast it to boolean
+        if meta[key] is "true"
+          meta[key] = true
+          i++
+          continue
+        if meta[key] is "false"
+          meta[key] = false
+          i++
+          continue
+
+        # cast it to integers
+        if not isNaN Math.round(meta[key])
+          meta[key] = Math.round meta[key]
+
+        # cast creators and authors to Array
+        if key in ["creator", "author"]
+          meta[key] = meta[key].split /, /
+      i++
+    meta
+
   addMeta: (meta) ->
-    for property of meta
+    for property of @cleanedMeta meta
       @meta[property] = meta[property]
 
   addAssetsFolders: (folders...) ->
