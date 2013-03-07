@@ -78,14 +78,15 @@ writer.addMeta(meta);
 writer.addPage("page-000.html");
 
 // if assets are required, add them:
-writer.addAssetsFolders('css', 'js');
+writer.assets.addFolders('css', 'js'); // list folders separeted by coma
+writer.assets.addFile('path/to/file.ext'); // one file at a time
 
 // build the book (book.json is going to be created)
 writer.build(function(err) {
   // book.json should be created by now
 
   // if you need a book.hpub it's time to do this now:
-  writer.pack("tmp/book", function(size) {
+  writer.pack("tmp/book", function(err, size) {
       // the book is ready!
   });
 });

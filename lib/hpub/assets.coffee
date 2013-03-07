@@ -11,7 +11,7 @@ class Assets
     for folder in folders
       @folders.push folder
 
-  addAssetFile: (file) ->
+  addFile: (file) ->
     @files.push file
 
   prepare: (callback) ->
