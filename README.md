@@ -1,7 +1,8 @@
 ## hpubjs - hpub reader and writer
-
+[![Build Status](https://travis-ci.org/fagbokforlaget/hpubjs.png)](https://travis-ci.org/fagbokforlaget/hpubjs)
 hpubjs provides access to hpub files in node.js applications.
 
+NOTE: It's still not compatible with node 0.10.x
 ### Installation
 
 via npm:
