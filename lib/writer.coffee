@@ -65,7 +65,7 @@ class Writer
 
   pack: (name, callback) ->
     out = fs.createWriteStream("#{name}.hpub")
-    archive = archiver.createZip({level: 1})
+    archive = archiver('zip')
     archive.pipe(out)
 
     archive.on 'error', (err) ->
@@ -79,7 +79,7 @@ class Writer
       unless err
         series = _.union series, result
         async.forEachSeries series, (file, next) =>
-            archive.addFile fs.createReadStream("#{@folder}/#{file}"), {name: "#{file}"}, -> 
+            archive.append fs.createReadStream("#{@folder}/#{file}"), {name: "#{file}"}, -> 
                 next()
           , (err) ->
             archive.finalize (err, written) ->
