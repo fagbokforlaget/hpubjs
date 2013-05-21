@@ -1,7 +1,10 @@
+path = require 'path'
 archiver = require 'archiver'
 async = require 'async'
-_ = require "underscore"
 fs = require 'fs-extra'
+_ = require "underscore"
+
+existsSync = ((if fs.existsSync then fs.existsSync else path.existsSync))
 
 class Writer
   constructor: (@folder) ->
@@ -19,7 +22,7 @@ class Writer
       callback(err)
 
   addPage: (name) ->
-    if fs.existsSync "#{@folder}/#{name}"
+    if existsSync "#{@folder}/#{name}"
       @meta.contents.push name
 
   addMeta: (meta) ->
