@@ -82,8 +82,10 @@ class Writer
             archive.addFile fs.createReadStream("#{@folder}/#{file}"), {name: "#{file}"}, -> 
                 next()
           , (err) ->
-            archive.finalize (written) ->
-                callback(written)
+            archive.finalize (err, written) ->
+              if err?
+                throw err
+              callback(written)
 
 
 exports.Writer = Writer
