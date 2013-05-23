@@ -8,11 +8,11 @@
   },
   "dependencies": {
     "coffee-script": "1.4.0",
-    "zipfile": "0.3.2",
-    "archiver": "0.4.0",
-    "async": "0.1.22",
-    "underscore": "1.4.2",
-    "fs-extra": "0.3.2",
+    "zipfile": "0.3.4",
+    "archiver": "0.4.3",
+    "async": "0.2.6",
+    "underscore": "1.4.4",
+    "fs-extra": "0.6.0",
     "mime-magic": "0.4.2"
   },
   "devDependencies": {

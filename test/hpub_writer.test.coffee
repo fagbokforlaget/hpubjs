@@ -1,6 +1,9 @@
+path = require 'path'
 assert = require('assert')
 hpub = require('../index.js')
 fs = require 'fs-extra'
+
+existsSync = (if fs.existsSync then fs.existsSync else path.existsSync)
 
 describe 'hpub', ->
   describe 'writer', ->
@@ -53,7 +56,7 @@ describe 'hpub', ->
         writer.build (err) ->
             assert.equal err, null
             file = "./test/hpub_samples/book_to_be/book.json"
-            assert.equal fs.existsSync(file), true
+            assert.equal existsSync(file), true
             fs.removeSync file
             done()
 

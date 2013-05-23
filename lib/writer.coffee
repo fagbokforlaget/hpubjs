@@ -1,8 +1,11 @@
+path = require 'path'
 archiver = require 'archiver'
 async = require 'async'
 _ = require "underscore"
 fs = require 'fs-extra'
 Assets = require './hpub/assets'
+
+existsSync = (if fs.existsSync then fs.existsSync else path.existsSync)
 
 class Writer
   constructor: (@folder) ->
@@ -22,7 +25,7 @@ class Writer
       callback(err)
 
   addPage: (name) ->
-    if fs.existsSync "#{@folder}/#{name}"
+    if existsSync "#{@folder}/#{name}"
       @meta.contents.push name
 
   # This method will cast all string objs to proper types
@@ -59,7 +62,8 @@ class Writer
 
   pack: (name, callback) ->
     out = fs.createWriteStream("#{name}.hpub")
-    archive = archiver.createZip({level: 1})
+    # archive = archiver.createZip({level: 1})
+    archive = archiver('zip')
     archive.pipe(out)
 
     archive.on 'error', (err) ->
@@ -74,7 +78,7 @@ class Writer
         series = _.union series, result
         series = _.union series, @assets.files
         async.forEachSeries series, (file, next) =>
-            archive.addFile fs.createReadStream("#{@folder}/#{file}"), {name: "#{file}"}, -> 
+            archive.append fs.createReadStream("#{@folder}/#{file}"), {name: "#{file}"}, -> 
                 next()
           , (err) ->
             archive.finalize (err, written) ->
