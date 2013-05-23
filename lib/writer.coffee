@@ -5,7 +5,7 @@ _ = require "underscore"
 fs = require 'fs-extra'
 Assets = require './hpub/assets'
 
-existsSync = (if fs.existsSync then fs.existsSync else path.existsSync)
+existsSync = ((if fs.existsSync then fs.existsSync else path.existsSync))
 
 class Writer
   constructor: (@folder) ->

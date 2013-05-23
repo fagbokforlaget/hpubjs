@@ -3,7 +3,7 @@ assert = require('assert')
 hpub = require('../index.js')
 fs = require 'fs-extra'
 
-existsSync = (if fs.existsSync then fs.existsSync else path.existsSync)
+existsSync = ((if fs.existsSync then fs.existsSync else path.existsSync))
 
 describe 'hpub', ->
   describe 'writer', ->
