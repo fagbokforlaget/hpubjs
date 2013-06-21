@@ -1,6 +1,6 @@
 {
   "name": "hpubjs",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "An hpub reader and writer",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "archiver": "0.4.3",
     "async": "0.2.6",
     "underscore": "1.4.4",
-    "fs-extra": "0.6.0",
+    "fs-extra": "0.6.1",
     "mime-magic": "0.4.2"
   },
   "devDependencies": {
