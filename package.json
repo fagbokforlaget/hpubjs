@@ -1,6 +1,6 @@
 {
   "name": "hpubjs",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "An hpub reader and writer",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "coffee-script": "1.4.0",
     "zipfile": "0.3.4",
     "archiver": "0.4.3",
-    "async": "0.2.6",
+    "async": "0.2.9",
     "underscore": "1.4.4",
     "fs-extra": "0.6.1",
     "mime-magic": "0.4.2"
