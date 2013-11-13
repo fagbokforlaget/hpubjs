@@ -62,7 +62,7 @@ describe 'hpub', ->
 
     it 'should be able to add assets folders', ->
         writer = new hpub.Writer "./test/hpub_samples/book_to_be"
-        
+
         writer.assets.addFolders('css', 'js')
 
         assert.equal writer.assets.folders[0], 'css'
@@ -96,7 +96,7 @@ describe 'hpub', ->
                 fs.removeSync file
                 fs.removeSync "test/book.hpub"
                 done()
-                
+
 
     it 'should create an hpub book with assets', (done) ->
         writer = new hpub.Writer "./test/hpub_samples/book_to_be"

@@ -9,7 +9,7 @@ existsSync = ((if fs.existsSync then fs.existsSync else path.existsSync))
 
 class Writer
   constructor: (@folder) ->
-    @meta = 
+    @meta =
       hpub: 1
       title: ''
       author: ''
@@ -65,9 +65,13 @@ class Writer
     # archive = archiver.createZip({level: 1})
     archive = archiver('zip')
     archive.pipe(out)
+    error = undefined
 
     archive.on 'error', (err) ->
       console.log "pack err", err
+
+    out.on 'close', ->
+      callback(error, this.bytesWritten)
 
     series = @meta.contents
     series.push "book.json"
@@ -77,12 +81,16 @@ class Writer
       unless err
         series = _.union series, result
         series = _.union series, @assets.files
+
         async.forEachSeries series, (file, next) =>
-          archive.append fs.createReadStream("#{@folder}/#{file}"), {name: "#{file}"}
-          next()
+          readStream = fs.createReadStream "#{@folder}/#{file}"
+          archive.append readStream, {name: file}, (err) ->
+            next()
         , (err) ->
-          archive.finalize (err, written) ->
-            callback(err, written)
+          archive.finalize (err, bytes) ->
+            error = err
+      else
+        callback(err, null)
 
 
 exports.Writer = Writer
