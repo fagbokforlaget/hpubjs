@@ -7,13 +7,13 @@
     "test": "make test"
   },
   "dependencies": {
-    "coffee-script": "1.6.3",
-    "zipfile": "0.4.2",
+    "coffee-script": "1.11.1",
+    "zipfile": "0.5.9",
     "archiver": "0.4.10",
     "async": "0.2.9",
-    "underscore": "1.5.2",
-    "fs-extra": "0.8.1",
-    "mime-magic": "0.4.2"
+    "underscore": "1.8.3",
+    "fs-extra": "0.30.0",
+    "mime-magic": "5.14.0"
   },
   "devDependencies": {
     "mocha": "*"

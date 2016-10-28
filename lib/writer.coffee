@@ -21,7 +21,7 @@ class Writer
     @assets = new Assets @folder
 
   build: (callback) ->
-    fs.writeJSONFile "#{@folder}/book.json", @meta, (err) ->
+    fs.writeJSON "#{@folder}/book.json", @meta, (err) ->
       callback(err)
 
   addPage: (name) ->
